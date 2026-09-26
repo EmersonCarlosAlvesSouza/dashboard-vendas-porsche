@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porsche Sales Dashboard</title>
+    <script src="https://jsdelivr.net"></script>
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <div class="container mx-auto p-6">
+        <header class="mb-8 border-b border-gray-700 pb-4">
+            <h1 class="text-3xl font-bold tracking-wider text-red-500">PORSCHE PERFORMANCE DASHBOARD</h1>
+            <p class="text-gray-400">Análise de Indicadores e Métricas de Vendas Efetuadas</p>
+        </header>
+        
+        <!-- KPIs -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gray-800 p-6 rounded-lg border-l-4 border-red-500 shadow-lg">
+                <h3 class="text-gray-400 font-semibold uppercase tracking-wider text-xs">Receita Total Estimada</h3>
+                <p class="text-2xl font-bold mt-2">R$ 68.450.000</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg border-l-4 border-blue-500 shadow-lg">
+                <h3 class="text-gray-400 font-semibold uppercase tracking-wider text-xs">Total de Unidades</h3>
+                <p class="text-2xl font-bold mt-2">100 Veículos</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg border-l-4 border-green-500 shadow-lg">
+                <h3 class="text-gray-400 font-semibold uppercase tracking-wider text-xs">Ticket Médio Geral</h3>
+                <p class="text-2xl font-bold mt-2">R$ 684.500</p>
+            </div>
+        </div>
+
+        <!-- Seção de Filtros Simulados -->
+        <div class="bg-gray-800 p-4 rounded-lg mb-8 flex flex-wrap gap-4 items-center">
+            <span class="text-sm font-semibold text-gray-400">Filtros Ativos:</span>
+            <select class="bg-gray-700 text-white text-sm p-2 rounded border border-gray-600 focus:outline-none"><option>Todos os Modelos</option><option>Porsche 911</option><option>Porsche Taycan</option><option>Porsche Cayenne</option></select>
+            <select class="bg-gray-700 text-white text-sm p-2 rounded border border-gray-600 focus:outline-none"><option>Todas as Cidades</option><option>São Paulo</option><option>Rio de Janeiro</option><option>Brasília</option></select>
+            <button class="bg-red-600 hover:bg-red-700 text-white text-sm font-bold py-2 px-4 rounded transition">Aplicar Recorte</button>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-lg font-semibold mb-4 text-gray-300">Vendas por Modelo (Volume)</h2>
+                <canvas id="modelChart"></canvas>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-lg font-semibold mb-4 text-gray-300">Métodos de Pagamento Preferidos</h2>
+                <canvas id="paymentChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctxModel = document.getElementById('modelChart').getContext('2d');
+        new Chart(ctxModel, {
+            type: 'bar',
+            data: {
+                labels: ['911 Carrera', 'Taycan Electric', 'Cayenne SUV', 'Macan', 'Panamera'],
+                datasets: [{
+                    label: 'Unidades Vendidas',
+                    data: [25, 20, 30, 15, 10],
+                    backgroundColor: '#EF4444',
+                    borderColor: '#DC2626',
+                    borderWidth: 1
+                }]
+            },
+            options: { responsive: true, scales: { y: { beginAtZero: true, grid: { color: '#374151' } }, x: { grid: { display: false } } } }
+        });
+
+        const ctxPay = document.getElementById('paymentChart').getContext('2d');
+        new Chart(ctxPay, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pix / À Vista', 'Financiamento Bancário', 'Cartão / Crédito'],
+                datasets: [{
+                    data: [40, 45, 15],
+                    backgroundColor: ['#10B981', '#3B82F6', '#F59E0B']
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+</body>
+</html>
